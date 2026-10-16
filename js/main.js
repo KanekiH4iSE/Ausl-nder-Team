@@ -1,6 +1,6 @@
 const T={
 de:{
- skip:"Zur Demo springen",sound:"Ton",fullApp:"App im Vollbild",backSite:"Zur Website",keysHint:"Tipp: Tasten J, N oder ? funktionieren auch.",loadMsgs:["Ruhe wird geladen","Fragen werden sortiert","Anna wird benachrichtigt","Pause bereit"],loadSub:"ruhig, Schritt für Schritt, nie allein",loaded:"Seite geladen",mapLabel:"Illustration: Deutschlandkarte aus Punkten in den Farben der Flagge. Rote Linien zeigen gemeldete Betrugsanrufe, goldene Ringe zeigen, wo SafePause die Zahlung pausiert hätte.",lgCall:"gemeldeter Anruf",lgPause:"pausiert",lgSrc:"Illustration · Orte aus Polizeimeldungen, Sep–Okt 2026",homeL:"Herr Klaus",tkLabel:"Polizeimeldungen",
+ skip:"Zur Demo springen",alarmDone:"Überwiesen. Die 4.800 € sind weg.",alarmDoneS:"So endet es oft: Die laute Warnung war da, aber der Druck am Telefon war stärker.",alarmAgain:"Noch einmal ansehen",sound:"Ton",fullApp:"App im Vollbild",backSite:"Zur Website",keysHint:"Tipp: Tasten J, N oder ? funktionieren auch.",loadMsgs:["Ruhe wird geladen","Fragen werden sortiert","Anna wird benachrichtigt","Pause bereit"],loadSub:"ruhig, Schritt für Schritt, nie allein",loaded:"Seite geladen",mapLabel:"Illustration: Deutschlandkarte aus Punkten in den Farben der Flagge. Rote Linien zeigen gemeldete Betrugsanrufe, goldene Ringe zeigen, wo SafePause die Zahlung pausiert hätte.",lgCall:"gemeldeter Anruf",lgPause:"pausiert",lgSrc:"Illustration · Orte aus Polizeimeldungen, Sep–Okt 2026",homeL:"Herr Klaus",tkLabel:"Polizeimeldungen",
  tk:[["11.10.2026","Kaiserslautern","87 Jahre, falscher Polizist, hoher fünfstelliger Betrag überwiesen"],["05.10.2026","Kassel","falsche Bankmitarbeiter, mehrere Zehntausend Euro"],["25.09.2026","Günzburg","rund 129.000 € über Freigaben in der Banking-App"],["04.10.2026","Weimar","60 Jahre, über 6.500 € nach einer App-Freigabe"],["05.10.2026","Memmingen","73 Jahre, TAN am Telefon weitergegeben"],["11.09.2026","Hemer","ein Anruf über dreieinhalb Stunden"],["28.09.2026","Waldeck-Frankenberg","gefälschte Bank-Nummer auf dem Display"]],navDemo:"Demo",navWhy:"Warum",navPat:"Maschen",navA11y:"Barrierefreiheit",
  heroH:"Eine Pause, bevor das Geld *weg* ist.",
  heroSub:"Wenn ein falscher Bankmitarbeiter anruft, bremst SafePause den Moment: drei einfache Fragen, ein Anruf bei jemandem, dem man vertraut, und eine sichere Pause.",
@@ -26,7 +26,7 @@ de:{
  size:"Größer",contrast:"Kontrast",simple:"Einfach",detailed:"Ausführlich",read:"Vorlesen",stopRead:"Stopp",judge:"Alle Zustände",
  jScen:"Szenario",jScreen:"Bildschirm",jContrast:"Kontrast, live gemessen",ffwd:"Pause vorspulen",
  annaLbl:"Annas Handy",annaExplain:"Die Vertrauensperson sieht nur das Nötigste: gerundeter Betrag, „neuer Empfänger“. Keine IBAN.",
- scen:{klaus:"Herr Klaus (Anruf)",mismatch:"Name passt nicht",close:"Name passt fast",nocontact:"Keine Vertrauensperson",repeat:"Zweiter Versuch",expired:"Pause abgelaufen",offline:"Offline"},
+ scen:{klaus:"Herr Klaus (Anruf)",mismatch:"Name passt nicht",close:"Name passt fast",nocontact:"Keine Vertrauensperson",repeat:"Zweiter Versuch",expired:"Pause abgelaufen",offline:"Offline",noanswer:"Anna antwortet nicht"},
  screens:{bank:"Bank",notice:"1 Hinweis",q:"2 Fragen",findings:"3 Aufgefallen",trust:"4 Vertrauen",pause:"5 Pause",done:"6 Geschafft"},
  transfer:"Überweisung",from:"Von: Girokonto Klaus Becker",payee:"Empfänger",iban:"IBAN",amountL:"Betrag",purpose:"Verwendungszweck",purposeV:"Sicherheitsumbuchung",
  callNow:"Laufender Anruf: „Ihre Bank“",
@@ -62,15 +62,16 @@ de:{
  sentH:"Die Zahlung wurde ausgeführt.",sentL:"Falls Sie unsicher werden: Rufen Sie sofort Ihre Bank an. Je schneller, desto besser.",
  n1:"Ruft die Person wieder an? Legen Sie einfach auf.",n2:"Im Zweifel: Zugang sperren unter 116 116.",n3:"Echte Banken holen nie Karten an der Haustür ab.",
  report:"Versuch melden (Polizei oder Bank)",close:"Schließen",
- nLock:"Montag, 19. Oktober",nApp:"SafePause · Papa",nText:"Papa möchte ca. 4.800 € an einen neuen Empfänger senden. Er telefoniert gerade.",
+ nLock:"Montag, 19. Oktober",nApp:"SafePause · Papa",nText:"Papa möchte ca. 4.800\u00A0€ an einen neuen Empfänger senden. Er telefoniert gerade.",
  nStop:"Bitte stoppen",nOk:"Passt, alles gut",nPriv:"Du siehst keine IBAN und keine Kontodaten.",nIdle:"Keine neuen Mitteilungen",
  nStopped:"Du hast die Zahlung angehalten. Ruf Papa jetzt an.",nOked:"Du hast bestätigt. Papa entscheidet selbst.",
  tAnnaStop:"Anna hat die Zahlung angehalten.",tAnnaOk:"Anna hat bestätigt.",tCalling:"Anna wird benachrichtigt …",tCallSim:"In der echten App öffnet sich jetzt das Telefon.",tAdd:"Im Prototyp nicht verfügbar.",tReport:"Im Prototyp nicht verfügbar. In der echten App: 110 oder Ihre Bank.",
  noVoice:"Vorlesen wird von diesem Browser nicht unterstützt.",cText:"Text auf Hintergrund",cMuted:"Grauer Text",cBtn:"Knopf-Text",cGold:"Text auf Gold",amount:"4.800,00 €",aiCheck:"Wir prüfen kurz …",
- listen:"Anruf mitprüfen",listenOff:"Mikrofon aus",listening:"Hört zu …",micNo:"Kein Zugriff auf das Mikrofon.",liveWarn:"Was der Anrufer sagt, passt zu einer bekannten Masche. Lassen Sie sich Zeit."
+ listen:"Anruf mitprüfen",listenOff:"Mikrofon aus",listening:"Hört zu …",micNo:"Kein Zugriff auf das Mikrofon.",liveWarn:"Was der Anrufer sagt, passt zu einer bekannten Masche. Lassen Sie sich Zeit.",
+ missedH:"Anna ist gerade nicht erreichbar.",missedL:"Das ist kein Problem. Rufen Sie Ihre Bank unter der Nummer auf Ihrer Karte an, oder lassen Sie die Zahlung einfach pausieren.",nMissed:"Verpasster Anruf von Papa",nMissedS:"Ruf zurück, sobald du kannst.",aiErr:"Die Online-Prüfung ist gerade nicht erreichbar. Diese Hinweise kommen direkt aus der App.",tourStart:"Demo läuft automatisch …"
 },
 en:{
- skip:"Skip to demo",sound:"Sound",fullApp:"Full-screen app",backSite:"Back to website",keysHint:"Tip: keys Y, N or ? work too.",loadMsgs:["Loading calm","Sorting the questions","Letting Anna know","Pause ready"],loadSub:"calm, step by step, never alone",loaded:"Page loaded",mapLabel:"Illustration: a map of Germany made of dots in the flag colours. Red lines show reported scam calls; gold rings show where SafePause would have paused the payment.",lgCall:"reported call",lgPause:"paused",lgSrc:"Illustration · places from police reports, Sep–Oct 2026",homeL:"Herr Klaus",tkLabel:"Police reports",
+ skip:"Skip to demo",alarmDone:"Sent. The €4,800 is gone.",alarmDoneS:"This is how it often ends: the loud warning was there, but the pressure on the phone was stronger.",alarmAgain:"Watch again",sound:"Sound",fullApp:"Full-screen app",backSite:"Back to website",keysHint:"Tip: keys Y, N or ? work too.",loadMsgs:["Loading calm","Sorting the questions","Letting Anna know","Pause ready"],loadSub:"calm, step by step, never alone",loaded:"Page loaded",mapLabel:"Illustration: a map of Germany made of dots in the flag colours. Red lines show reported scam calls; gold rings show where SafePause would have paused the payment.",lgCall:"reported call",lgPause:"paused",lgSrc:"Illustration · places from police reports, Sep–Oct 2026",homeL:"Herr Klaus",tkLabel:"Police reports",
  tk:[["11.10.2026","Kaiserslautern","aged 87, fake police officer, high five-figure sum transferred"],["05.10.2026","Kassel","fake bank employees, tens of thousands of euros"],["25.09.2026","Günzburg","about €129,000 via banking-app approvals"],["04.10.2026","Weimar","aged 60, over €6,500 after one app approval"],["05.10.2026","Memmingen","aged 73, TAN shared on the phone"],["11.09.2026","Hemer","one call lasting three and a half hours"],["28.09.2026","Waldeck-Frankenberg","faked bank number on the caller display"]],navDemo:"Demo",navWhy:"Why",navPat:"Scams",navA11y:"Accessibility",
  heroH:"A pause before the money is *gone*.",
  heroSub:"When a fake bank employee calls, SafePause slows the moment down: three simple questions, a call to someone you trust, and a safe pause.",
@@ -96,7 +97,7 @@ en:{
  size:"Larger",contrast:"Contrast",simple:"Simple",detailed:"Detailed",read:"Read aloud",stopRead:"Stop",judge:"All states",
  jScen:"Scenario",jScreen:"Screen",jContrast:"Contrast, measured live",ffwd:"Fast-forward pause",
  annaLbl:"Anna's phone",annaExplain:"The trusted person sees only what's needed: a rounded amount and \"new payee\". No IBAN.",
- scen:{klaus:"Herr Klaus (call)",mismatch:"Name doesn't match",close:"Name almost matches",nocontact:"No trusted person",repeat:"Second attempt",expired:"Pause expired",offline:"Offline"},
+ scen:{klaus:"Herr Klaus (call)",mismatch:"Name doesn't match",close:"Name almost matches",nocontact:"No trusted person",repeat:"Second attempt",expired:"Pause expired",offline:"Offline",noanswer:"Anna doesn't answer"},
  screens:{bank:"Bank",notice:"1 Notice",q:"2 Questions",findings:"3 Findings",trust:"4 Trust",pause:"5 Pause",done:"6 Done"},
  transfer:"Transfer",from:"From: current account Klaus Becker",payee:"Payee",iban:"IBAN",amountL:"Amount",purpose:"Reference",purposeV:"Security transfer",
  callNow:"Ongoing call: \"Your bank\"",
@@ -137,10 +138,11 @@ en:{
  nStopped:"You paused the payment. Call Dad now.",nOked:"You confirmed. Dad decides himself.",
  tAnnaStop:"Anna paused the payment.",tAnnaOk:"Anna confirmed.",tCalling:"Notifying Anna …",tCallSim:"In the real app, the phone dialer opens now.",tAdd:"Not available in the prototype.",tReport:"Not available in the prototype. In the real app: 110 or your bank.",
  noVoice:"Read aloud isn't supported in this browser.",cText:"Text on background",cMuted:"Grey text",cBtn:"Button text",cGold:"Text on gold",amount:"€4,800.00",aiCheck:"Checking for a moment …",
- listen:"Check this call",listenOff:"Microphone off",listening:"Listening …",micNo:"No access to the microphone.",liveWarn:"What the caller says matches a known trick. Take your time."
+ listen:"Check this call",listenOff:"Microphone off",listening:"Listening …",micNo:"No access to the microphone.",liveWarn:"What the caller says matches a known trick. Take your time.",
+ missedH:"Anna can't be reached right now.",missedL:"That's okay. Call your bank on the number on your card, or simply leave the payment paused.",nMissed:"Missed call from Dad",nMissedS:"Call back as soon as you can.",aiErr:"The online check isn't reachable right now. These tips come straight from the app.",tourStart:"Demo is playing automatically …"
 }};
 
-const SCEN={klaus:{vop:"match",contacts:true},mismatch:{vop:"mismatch",contacts:true},close:{vop:"close",contacts:true},nocontact:{vop:"match",contacts:false},repeat:{vop:"match",contacts:true,repeat:true},expired:{vop:"match",contacts:true,start:"pause",expired:true},offline:{vop:"match",contacts:true,offline:true}};
+const SCEN={klaus:{vop:"match",contacts:true},mismatch:{vop:"mismatch",contacts:true},close:{vop:"close",contacts:true},nocontact:{vop:"match",contacts:false},repeat:{vop:"match",contacts:true,repeat:true},expired:{vop:"match",contacts:true,start:"pause",expired:true},offline:{vop:"match",contacts:true,offline:true},noanswer:{vop:"match",contacts:true,noanswer:true}};
 const ORDER=["bank","notice","q","findings","trust","pause","done"];
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const FINE=matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -184,8 +186,9 @@ function api(p,body,ms){return fetch(API+p,{method:"POST",headers:{"Content-Type
 async function aiCheck(){
   st.ai=null;const S=SCEN[st.scen];if(API===null||S.offline)return;
   const L=t();toast(L.aiCheck);
-  st.ai=await api("/api/check",{sid:SID,uid:UID,lang:pref.lang,tx:{payee:"M. Keller",iban:"DE89370400440532013000",amount:4800,purpose:L.purposeV,vop:S.vop,newPayee:true},
+  st.aiErr=false;st.ai=await api("/api/check",{sid:SID,uid:UID,lang:pref.lang,tx:{payee:"M. Keller",iban:"DE89370400440532013000",amount:4800,purpose:L.purposeV,vop:S.vop,newPayee:true},
     ctx:{onCall:true,answers:st.ans,hour:new Date().getHours()},transcript:mic||st.live?"":L.script.join(" ")});
+  if(!st.ai)st.aiErr=true;
   $("toast").classList.remove("show");
 }
 
@@ -246,6 +249,7 @@ function applyStatic(){
   $("annaLbl").textContent=L.annaLbl;$("annaExplain").textContent=L.annaExplain;
   $("jh1").textContent=L.jScen;$("jh2").textContent=L.jScreen;$("jh3").textContent=L.jContrast;
   tilesRender();
+  if(typeof alarmSent!=="undefined"&&alarmSent)$("alarmBtn").textContent=L.alarmAgain;
 }
 
 function applyPrefs(){
@@ -350,16 +354,32 @@ if(RM)document.querySelectorAll(".reveal").forEach(e=>e.style.opacity=1);
 
 /* ---------- compare alarm ---------- */
 let cdv=59;
+let alarmAnims=[],alarmSent=false;
+function alarmToggle(){
+  const L=t(),a=$("alarm");alarmSent=!alarmSent;
+  $("alarmLive").hidden=alarmSent;$("alarmDone").hidden=!alarmSent;a.classList.toggle("gone",alarmSent);
+  $("alarmBtn").textContent=alarmSent?L.alarmAgain:L.alarmB;
+  alarmAnims.forEach(x=>x&&(alarmSent?x.pause():x.play()));
+  if(alarmSent){A($("alarmDone"),[{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"none"}],{duration:500,easing:OUT});chime("ping")}
+}
+function demoJump(screen){
+  st=fresh("klaus");annaRender();st.screen=screen;
+  $("demo").scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});
+  setTimeout(()=>render(true),RM?0:450);
+}
+$("alarmBtn").addEventListener("click",alarmToggle);
+$("calmCheck").addEventListener("click",()=>demoJump("q"));
+$("calmLater").addEventListener("click",()=>demoJump("pause"));
 function alarmLoop(){
   const a=$("alarm");
-  A(a,[{transform:"translateX(0)"},{transform:"translateX(-6px)"},{transform:"translateX(6px)"},{transform:"translateX(-4px)"},{transform:"translateX(0)"}],{duration:420,iterations:Infinity,delay:0,easing:"linear",endDelay:2200});
-  A(a,[{filter:"brightness(1)"},{filter:"brightness(1.25)"},{filter:"brightness(1)"}],{duration:900,iterations:Infinity});
+  alarmAnims.push(A($("alarmLive"),[{transform:"translateX(0)"},{transform:"translateX(-6px)"},{transform:"translateX(6px)"},{transform:"translateX(-4px)"},{transform:"translateX(0)"}],{duration:420,iterations:Infinity,delay:0,easing:"linear",endDelay:2200}));
+  alarmAnims.push(A(a,[{filter:"brightness(1)"},{filter:"brightness(1.25)"},{filter:"brightness(1)"}],{duration:900,iterations:Infinity}));
   setInterval(()=>{cdv=cdv<=1?59:cdv-1;$("cd").textContent="0:"+String(cdv).padStart(2,"0")},1000);
 }
 
 /* ---------- pattern tiles ---------- */
 function tilesRender(){
-  const L=t(),cols=[["#000","var(--flag-red)","var(--gold)"]];
+  const L=t();
   $("tiles").innerHTML=L.pats.map((p,i)=>`<button class="tile" aria-pressed="false" data-d="${i*90}" aria-label="${p[0]}">
     <span class="in">
       <span class="face front spot"><span class="bar3" aria-hidden="true"><i style="background:${i%3===0?"var(--ink)":"var(--line)"}"></i><i style="background:${i%3===1?"var(--flag-red)":"var(--line)"}"></i><i style="background:${i%3===2?"var(--gold)":"var(--line)"}"></i></span>
@@ -423,11 +443,11 @@ function screenHTML(){
     const v=S.vop==="mismatch"?[L.vMis,L.vMisD]:S.vop==="close"?[L.vClose,L.vCloseD]:[L.vMatch,L.vMatchD];
     const ai=st.ai&&st.ai.lang===pref.lang&&st.ai.points.length?st.ai.points.map(p=>[ic[p.icon]||ic.info,esc(p.title),esc(p.detail)]):null;
     const list=(ai||pts).slice(0,2).concat([[ic.id,v[0],v[1]]]);
-    return `<h1 tabindex="-1" data-read>${L.findH}</h1><ul class="points">${list.map(p=>`<li><span class="ic">${p[0]}</span><span><span data-read>${p[1]}</span>${pref.simple?"":`<small data-read>${p[2]}</small>`}</span></li>`).join("")}</ul><div class="grow"></div>
+    return `<h1 tabindex="-1" data-read>${L.findH}</h1>${st.aiErr?`<p class="meta" role="status" style="margin:0 0 .4rem">${L.aiErr}</p>`:""}<ul class="points">${list.map(p=>`<li><span class="ic">${p[0]}</span><span><span data-read>${p[1]}</span>${pref.simple?"":`<small data-read>${p[2]}</small>`}</span></li>`).join("")}</ul><div class="grow"></div>
     <button class="btn pri" data-act="trust">${L.ask}</button><button class="btn" data-act="pause">${L.pauseBtn}</button><button class="btn quiet" data-act="anyway">${L.anyway}</button>`;}
   case "trust":
     if(!S.contacts)return `<h1 tabindex="-1" data-read>${L.emptyH}</h1><p class="lead" data-read>${L.emptyL}</p><button class="btn pri left" data-act="add">${ic.plus}${L.addContact}</button><button class="btn left" data-act="bankcall">${ic.bank}${L.callBank}</button><button class="btn left" data-act="block">${ic.lock}${L.block}</button><div class="grow"></div><button class="btn quiet" data-act="pause">${L.toPause}</button>`;
-    return `<h1 tabindex="-1" data-read>${L.trustH}</h1><p class="lead" data-read>${L.trustL}</p><div class="pair"><button class="btn pri" data-act="anna">${ic.phone}${L.callAnna}</button><button class="btn" data-act="anna">${ic.msg}${L.textAnna}</button></div>
+    return `${st.missed?`<div class="banner" role="status">${ic.info}<span><b data-read>${L.missedH}</b> <span data-read>${L.missedL}</span></span></div>`:""}<h1 tabindex="-1" data-read>${L.trustH}</h1><p class="lead" data-read>${L.trustL}</p><div class="pair"><button class="btn pri" data-act="anna">${ic.phone}${L.callAnna}</button><button class="btn" data-act="anna">${ic.msg}${L.textAnna}</button></div>
       <button class="btn left" data-act="bankcall">${ic.bank}${L.callBank}</button><button class="btn left" data-act="block">${ic.lock}${L.block}</button>
       <p class="meta" style="margin-top:1.1rem;text-align:center;font-weight:700;color:var(--ink)" data-read>${L.trustNote}</p><div class="grow"></div><button class="btn quiet" data-act="pause">${L.toPause}</button>`;
   case "pause":
@@ -451,6 +471,7 @@ function annaRender(animate){
   const L=t(),el=$("pscreen"),now=new Date(),hh=String(now.getHours()).padStart(2,"0"),mm=String(now.getMinutes()).padStart(2,"0");
   let body="";
   if(st.anna===0)body=`<p class="pidle">${L.nIdle}</p>`;
+  else if(st.anna===4)body=`<div class="notif" id="notif" role="group" aria-label="${L.nMissed}"><div class="h"><span class="m" aria-hidden="true"><i style="background:#000"></i><i style="background:#DD0000"></i><i style="background:#FFCC00"></i></span>${L.nMissed}</div><p>${L.nMissedS}</p></div>`;
   else{const tail=st.anna===1?`<button class="nbtn stopn" data-anna="stop">${L.nStop}</button><button class="nbtn" data-anna="ok">${L.nOk}</button><p class="privacy">${L.nPriv}</p>`:`<p style="margin:.2rem 0 0;font-weight:700">${st.anna===2?L.nStopped:L.nOked}</p>`;
     body=`<div class="notif" id="notif" role="group" aria-label="${L.nApp}"><div class="h"><span class="m" aria-hidden="true"><i style="background:#000"></i><i style="background:#DD0000"></i><i style="background:#FFCC00"></i></span>${L.nApp}</div><p>${L.nText}</p>${tail}</div>`}
   el.innerHTML=`<div class="clock" aria-hidden="true">${hh}:${mm}</div><div class="date">${L.nLock}</div>${body}`;
@@ -528,7 +549,8 @@ $("screen").addEventListener("click",e=>{
   if(a==="approve"){go("notice");chime("calm")}if(a==="check")go("q",{q:0,ans:[]});if(a==="notnow")go("pause");if(a==="dictated")go("trust");
   if(a==="trust")go("trust",{anyway:false});if(a==="pause")go("pause");if(a==="anyway"){st.anyway=true;render()}
   if(a==="send")go("done",{variant:"sent",anyway:false});
-  if(a==="anna"){toast(L.tCalling);if(st.anna===0){st.anna=1;annaRender(true);chime("ping");if(navigator.vibrate)navigator.vibrate([60,40,60])}}
+  if(a==="anna"&&SCEN[st.scen].noanswer){toast(L.tCalling);if(st.anna===0){st.anna=4;annaRender(true);chime("ping");setTimeout(()=>{if(st.screen==="trust"){st.missed=true;render(false)}},2200)}}
+  else if(a==="anna"){toast(L.tCalling);if(st.anna===0){st.anna=1;annaRender(true);chime("ping");if(navigator.vibrate)navigator.vibrate([60,40,60])}}
   if(a==="bankcall"||a==="block")toast(L.tCallSim);if(a==="add")toast(L.tAdd);if(a==="report")toast(L.tReport);
   if(a==="cancel"){go("done",{variant:"cancel"});chime("done")}if(a==="later")go("done",{variant:"later"});
   if(a==="recheck")go("findings",{expired:false,left:1800});
@@ -655,12 +677,29 @@ function runLoader(done){
     };
   }
 }
-const APP=new URLSearchParams(location.search).has("app")||location.hash==="#app";
+const QS=new URLSearchParams(location.search),TOUR=QS.has("tour");
+const APP=QS.has("app")||location.hash==="#app"||TOUR;
+if(["de","en"].includes(QS.get("lang")))pref.lang=QS.get("lang");
+/* autoplay for screen recording: ?tour (add &lang=en for English) */
+async function tour(){
+  const w=ms=>new Promise(r=>setTimeout(r,ms));
+  const tap=async(sel,before=900)=>{const b=document.querySelector(sel);if(!b)return;b.scrollIntoView({block:"center",behavior:"smooth"});await w(before);
+    A(b,[{boxShadow:"0 0 0 0 rgba(255,204,0,.9)"},{boxShadow:"0 0 0 14px rgba(255,204,0,0)"}],{duration:700});await w(450);b.click()};
+  toast(t().tourStart);await w(6500);
+  await tap("[data-act=approve]");await w(3800);
+  await tap("[data-act=check]");await w(2600);
+  for(const a of ["yes","yes","no"]){await tap(`[data-ans=${a}]`,1500);await w(1700)}
+  await w(4200);
+  await tap("[data-act=trust]");await w(2600);
+  await tap("[data-act=anna]");await w(3000);
+  await tap("[data-anna=stop]",1200);await w(7000);
+  await tap("[data-act=cancel]");await w(5000);
+}
 if(APP){document.body.classList.add("appmode");document.title="SafePause – App"}
 (function init(){
   const d=new Date();$("clockTop").textContent=String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
   applyPrefs();applyStatic();tickerRender();annaRender();enterScreen(false);
   buildMap();requestAnimationFrame(mapLoop);
   alarmLoop();
-  if(APP){const l=$("loader");if(l)l.remove();startIntro()}else runLoader(startIntro);
+  if(APP){const l=$("loader");if(l)l.remove();startIntro();if(TOUR)setTimeout(tour,600)}else runLoader(startIntro);
 })();

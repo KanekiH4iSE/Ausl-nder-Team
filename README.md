@@ -1,5 +1,7 @@
 # SafePause
 
+![SafePause](docs/cover.png)
+
 **Eine Pause, bevor das Geld weg ist.** · *A pause before the money is gone.*
 
 SafePause is a calm fraud-alert experience for German online-banking users aged 60+. When a fake bank employee is on the phone and pushes someone to approve a transfer, SafePause slows the moment down: three simple questions, a plain-language explanation, one tap to a trusted person, and a safe pause while the money stays in the account.
@@ -14,6 +16,8 @@ Built for **Hyperbloom October 2026 – UI/UX and Web Design**.
 |---|---|
 | Website + embedded demo | https://safepause-eine-pause-bevor-das-geld.vercel.app |
 | Full-screen web app | https://safepause-eine-pause-bevor-das-geld.vercel.app/?app |
+| Autoplay demo (≈1 min, used for the video) | https://safepause-eine-pause-bevor-das-geld.vercel.app/?tour · English: `?tour&lang=en` |
+| Screenshots | [`docs/screenshots/`](docs/screenshots) |
 | Figma prototype | *add link* |
 | Video | *add link* |
 
@@ -58,7 +62,7 @@ Targets WCAG 2.2 AA / EN 301 549:
 
 ## Judge mode
 
-Open **"Alle Zustände / All states"** in the demo to jump to any screen or scenario: name mismatch, close match, no trusted person, repeated attempt, pause expired, offline. "Fast-forward pause" shows the expiry state.
+Open **"Alle Zustände / All states"** in the demo to jump to any screen or scenario: name mismatch, close match, no trusted person, Anna doesn't answer, repeated attempt, pause expired, offline. "Fast-forward pause" shows the expiry state.
 
 ## Run it
 
@@ -86,6 +90,17 @@ Then open http://127.0.0.1:8000 (website) or http://127.0.0.1:8000/?app (app onl
 | Static only (`npx serve .`, Vercel, or opening `index.html`) | Same interface, no API: scripted demo texts. The page checks `/api/health` and falls back silently |
 
 The Vercel site is static, so it always runs in demo mode. To point a static page at a running backend elsewhere, add `?api=https://your-backend` to the URL.
+
+## Deploy (Deployxa or any Docker host)
+
+The `Dockerfile` builds one container that serves the website and the API on port 8000. Laya is off in the container (free tiers don't have the RAM for it); rules and LLM texts run.
+
+1. Push this repo to GitHub.
+2. In Deployxa: new project → import the GitHub repo → it detects the `Dockerfile`.
+3. Set the port to `8000` if asked, and add `RELAY_API_KEY` as an environment variable (optional).
+4. Deploy, then open `https://<your-app>/api/health` – it should return `{"ok":true,...}`.
+
+A `Procfile` is included for platforms that run Python without Docker. The static Vercel site keeps working as a fallback demo.
 
 ## Tech
 
@@ -153,9 +168,9 @@ Data: call transcripts stay in memory for 1 hour. SQLite (`backend/data/`) logs 
 
 ## Testing
 
-`tests/qa.py` drives the site in a headless browser (Playwright) and checks every claim in this README: all seven scenarios, the full Herr Klaus flow, Anna's "Please stop", keyboard answers in DE and EN, button height and minimum text size on every app screen, colour contrast in light, dark and high-contrast mode, focus visibility, reflow at 200% text and at 320 px, reduced motion, and an axe-core WCAG 2.2 AA scan of the landing page and the app.
+`tests/qa.py` drives the site in a headless browser (Playwright) and checks every claim in this README: all eight scenarios, the full Herr Klaus flow, Anna's "Please stop", keyboard answers in DE and EN, button height and minimum text size on every app screen, colour contrast in light, dark and high-contrast mode, focus visibility, reflow at 200% text and at 320 px, reduced motion, and an axe-core WCAG 2.2 AA scan of the landing page and the app.
 
-Latest run: **35 / 35 passed**, 0 axe-core violations.
+Latest run: **36 / 36 passed**, 0 axe-core violations.
 
 ```bash
 cd tests
@@ -174,7 +189,7 @@ Backend rule tests: `cd backend && pytest -q` (14 tests).
 - A browser cannot detect an active phone call; the call signal is simulated. A real banking app would use OS signals where available and question 1 otherwise.
 - VoP results and risk scoring would come from the bank.
 - "Designed with BFSG and WCAG 2.2 in mind", not certified compliant.
-- User feedback so far is formative (small sample), not validation.
+- We have not yet run a structured test with older users; that is the next step.
 
 ## Built during the hackathon
 
@@ -186,8 +201,8 @@ We used Claude (Anthropic) to help with research, copywriting and front-end code
 
 ## Team
 
-- *Name – role*
-- *Name – role*
+- Mirzobehruz Shaidov ([@KanekiH4iSE](https://github.com/KanekiH4iSE)) – *role*
+- [@Nems1337](https://github.com/veyselpavyoncuoglu) – backend, scam detection rules, Laya fine-tuning, live call check
 - *Name – role*
 
 ## License

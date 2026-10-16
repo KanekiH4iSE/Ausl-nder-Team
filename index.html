@@ -134,19 +134,25 @@
     <div class="compare">
       <div class="cmp reveal spot" aria-labelledby="cmpL">
         <p class="lbl" id="cmpL"><i style="background:var(--red)"></i><span data-i="cmpLeft">Typische Warnung</span></p>
-        <div class="alarm" id="alarm" aria-hidden="true">
-          <b data-i="alarmH">WARNUNG! Verdächtige Transaktion erkannt!</b>
-          <div class="cd" id="cd">0:59</div>
-          <span data-i="alarmS">Handeln Sie sofort!</span>
-          <div class="fake" data-i="alarmB">Trotzdem senden</div>
+        <div class="alarm" id="alarm">
+          <div id="alarmLive">
+            <b data-i="alarmH">WARNUNG! Verdächtige Transaktion erkannt!</b>
+            <div class="cd" id="cd" aria-hidden="true">0:59</div>
+            <span data-i="alarmS">Handeln Sie sofort!</span>
+          </div>
+          <div id="alarmDone" hidden>
+            <b data-i="alarmDone">Überwiesen. Die 4.800 € sind weg.</b>
+            <p data-i="alarmDoneS">So endet es oft: Die laute Warnung war da, aber der Druck am Telefon war stärker.</p>
+          </div>
+          <button class="fake" id="alarmBtn" type="button" data-i="alarmB">Trotzdem senden</button>
         </div>
       </div>
       <div class="cmp reveal spot" aria-labelledby="cmpR">
         <p class="lbl" id="cmpR"><i style="background:var(--gold)"></i><span>SafePause</span></p>
-        <div class="calm" aria-hidden="true">
+        <div class="calm">
           <b data-i="calmH">Diese Überweisung wirkt ungewöhnlich.</b>
           <p style="margin:.6rem 0 1rem" data-i="calmS">Lassen Sie uns kurz gemeinsam prüfen.</p>
-          <div class="mini"><span data-i="check">Gemeinsam prüfen</span><span data-i="notNow">Jetzt nicht</span></div>
+          <div class="mini"><button type="button" id="calmCheck" data-i="check">Gemeinsam prüfen</button><button type="button" id="calmLater" data-i="notNow">Jetzt nicht</button></div>
         </div>
       </div>
     </div>

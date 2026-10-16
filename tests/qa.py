@@ -21,10 +21,15 @@ async def main():
     # scenarios via judge mode
     await pg.click('#tJudge')
     checks={'mismatch':('findings','passt nicht zur IBAN'),'close':('findings','nur fast'),'nocontact':('trust','noch keine Vertrauensperson'),'repeat':('notice','zweite Versuch'),'offline':('bank','Keine Internetverbindung'),'expired':('pause','Die Pause ist vorbei')}
+    # 'Anna doesn't answer' needs a tap, checked separately below
     for sc,(screen,txt) in checks.items():
         await pg.click(f'[data-scen={sc}]'); await pg.wait_for_timeout(500)
         await pg.click(f'[data-jump={screen}]'); await pg.wait_for_timeout(700)
         t=await pg.inner_text('#screen'); rep(txt in t,f'Scenario "{sc}" shows expected state',txt)
+    await pg.click('[data-scen=noanswer]'); await pg.wait_for_timeout(500)
+    await pg.click('[data-jump=trust]'); await pg.wait_for_timeout(700)
+    await pg.click('[data-act=anna]'); await pg.wait_for_timeout(3200)
+    rep('nicht erreichbar' in await pg.inner_text('#screen'),'Scenario "noanswer": Anna unreachable banner, other help stays')
     # full klaus flow with keyboard answers
     await pg.click('[data-scen=klaus]'); await pg.wait_for_timeout(600)
     await pg.click('[data-act=approve]'); await pg.wait_for_timeout(700)
