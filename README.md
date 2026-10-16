@@ -62,12 +62,16 @@ Open **"Alle Zustände / All states"** in the demo to jump to any screen or scen
 
 ## Tech
 
-- One self-contained `index.html`: HTML, CSS and vanilla JavaScript, no build step. Works without a backend; when `backend/` is running it uses it for the "What we noticed" screen.
+- Plain HTML, CSS and vanilla JavaScript, no build step:
+  - `index.html` – markup
+  - `css/style.css` – design tokens, themes (dark page, light app screen, high contrast), layout, motion
+  - `js/main.js` – copy (DE/EN), app flow and scenarios, animations, map, accessibility features, optional backend calls
+- Works without a backend; when `backend/` is running it uses it for the "What we noticed" screen and the live call check.
 - Web Animations API and Canvas for motion (dot-matrix map of Germany), Web Audio API for soft cues, Web Speech API for read-aloud.
 - Google Fonts: Atkinson Hyperlegible Next, Barlow Condensed.
 - Deployed as a static site on Vercel.
 
-Run locally: open `index.html` in a browser, or `npx serve .`
+Run locally: `npx serve .` (or open `index.html` in a browser).
 
 ## Scam detection backend (optional)
 

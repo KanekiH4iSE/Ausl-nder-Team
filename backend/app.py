@@ -9,6 +9,7 @@ load_dotenv(ROOT/".env")
 from fastapi import FastAPI,Request,HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel
 import rules,laya_svc,relay,explain,store
@@ -148,6 +149,10 @@ def report(b:ReportIn):
 @app.get("/")
 def index():
 	return FileResponse(ROOT/"index.html")
+
+# only the frontend folders, never the repo root (.env lives there)
+app.mount("/css",StaticFiles(directory=ROOT/"css"),name="css")
+app.mount("/js",StaticFiles(directory=ROOT/"js"),name="js")
 
 if __name__ == "__main__":
 	import uvicorn
