@@ -1,4 +1,4 @@
-import re,json
+import os,re,json
 import relay
 
 ICON = {"on_call":"phone","authority":"phone","credentials":"lock","safe_account":"bank","pressure":"clock",
@@ -114,6 +114,9 @@ def explain(sig,l,facts):
 	cand = fallback(sig,l,5)
 	if not cand:
 		return [],False
+	# no relay key: skip the network call, use the fixed calm texts
+	if not os.getenv("RELAY_API_KEY"):
+		return cand[:3],False
 	sysm = SYS.format(lang="German" if l == "de" else "English",sie=" Address the person with formal \"Sie\"." if l == "de" else "",ex=EX[l])
 	user = json.dumps({"candidates":[{"code":c["code"],"default":c["title"]+" "+c["detail"]} for c in cand],"facts":facts},ensure_ascii=False)
 	try:

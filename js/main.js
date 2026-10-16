@@ -66,7 +66,8 @@ de:{
  nStop:"Bitte stoppen",nOk:"Passt, alles gut",nPriv:"Du siehst keine IBAN und keine Kontodaten.",nIdle:"Keine neuen Mitteilungen",
  nStopped:"Du hast die Zahlung angehalten. Ruf Papa jetzt an.",nOked:"Du hast bestätigt. Papa entscheidet selbst.",
  tAnnaStop:"Anna hat die Zahlung angehalten.",tAnnaOk:"Anna hat bestätigt.",tCalling:"Anna wird benachrichtigt …",tCallSim:"In der echten App öffnet sich jetzt das Telefon.",tAdd:"Im Prototyp nicht verfügbar.",tReport:"Im Prototyp nicht verfügbar. In der echten App: 110 oder Ihre Bank.",
- noVoice:"Vorlesen wird von diesem Browser nicht unterstützt.",cText:"Text auf Hintergrund",cMuted:"Grauer Text",cBtn:"Knopf-Text",cGold:"Text auf Gold",amount:"4.800,00 €"
+ noVoice:"Vorlesen wird von diesem Browser nicht unterstützt.",cText:"Text auf Hintergrund",cMuted:"Grauer Text",cBtn:"Knopf-Text",cGold:"Text auf Gold",amount:"4.800,00 €",aiCheck:"Wir prüfen kurz …",
+ listen:"Anruf mitprüfen",listenOff:"Mikrofon aus",listening:"Hört zu …",micNo:"Kein Zugriff auf das Mikrofon.",liveWarn:"Was der Anrufer sagt, passt zu einer bekannten Masche. Lassen Sie sich Zeit."
 },
 en:{
  skip:"Skip to demo",sound:"Sound",fullApp:"Full-screen app",backSite:"Back to website",keysHint:"Tip: keys Y, N or ? work too.",loadMsgs:["Loading calm","Sorting the questions","Letting Anna know","Pause ready"],loadSub:"calm, step by step, never alone",loaded:"Page loaded",mapLabel:"Illustration: a map of Germany made of dots in the flag colours. Red lines show reported scam calls; gold rings show where SafePause would have paused the payment.",lgCall:"reported call",lgPause:"paused",lgSrc:"Illustration · places from police reports, Sep–Oct 2026",homeL:"Herr Klaus",tkLabel:"Police reports",
@@ -135,7 +136,8 @@ en:{
  nStop:"Please stop",nOk:"It's fine",nPriv:"You don't see the IBAN or any account details.",nIdle:"No new notifications",
  nStopped:"You paused the payment. Call Dad now.",nOked:"You confirmed. Dad decides himself.",
  tAnnaStop:"Anna paused the payment.",tAnnaOk:"Anna confirmed.",tCalling:"Notifying Anna …",tCallSim:"In the real app, the phone dialer opens now.",tAdd:"Not available in the prototype.",tReport:"Not available in the prototype. In the real app: 110 or your bank.",
- noVoice:"Read aloud isn't supported in this browser.",cText:"Text on background",cMuted:"Grey text",cBtn:"Button text",cGold:"Text on gold",amount:"€4,800.00"
+ noVoice:"Read aloud isn't supported in this browser.",cText:"Text on background",cMuted:"Grey text",cBtn:"Button text",cGold:"Text on gold",amount:"€4,800.00",aiCheck:"Checking for a moment …",
+ listen:"Check this call",listenOff:"Microphone off",listening:"Listening …",micNo:"No access to the microphone.",liveWarn:"What the caller says matches a known trick. Take your time."
 }};
 
 const SCEN={klaus:{vop:"match",contacts:true},mismatch:{vop:"mismatch",contacts:true},close:{vop:"close",contacts:true},nocontact:{vop:"match",contacts:false},repeat:{vop:"match",contacts:true,repeat:true},expired:{vop:"match",contacts:true,start:"pause",expired:true},offline:{vop:"match",contacts:true,offline:true}};
@@ -170,6 +172,59 @@ const t=()=>T[pref.lang];
 
 function fresh(key){const s=SCEN[key];return{scen:key,screen:s.start||"bank",q:0,ans:[],anna:0,annaMsg:false,left:1800,expired:!!s.expired,variant:"cancel",anyway:false}}
 let st=fresh("klaus"),timer=null,breathT=null,typeT=null,busy=false;
+
+/* ---------- backend (optional, see backend/) ---------- */
+const newId=()=>Math.random().toString(36).slice(2);
+let API=null,SID=newId();const UID="klaus-"+newId();
+(async()=>{const b=new URLSearchParams(location.search).get("api")||"";if(!b&&!location.protocol.startsWith("http"))return;
+  try{const r=await fetch(b+"/api/health",{signal:AbortSignal.timeout(2500)});if(r.ok&&(await r.json()).ok)API=b}catch(e){}
+  if(API!==null&&st.screen==="bank"&&!busy)render(false)})();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function api(p,body,ms){return fetch(API+p,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),signal:AbortSignal.timeout(ms||8000)}).then(r=>r.ok?r.json():null).catch(()=>null)}
+async function aiCheck(){
+  st.ai=null;const S=SCEN[st.scen];if(API===null||S.offline)return;
+  const L=t();toast(L.aiCheck);
+  st.ai=await api("/api/check",{sid:SID,uid:UID,lang:pref.lang,tx:{payee:"M. Keller",iban:"DE89370400440532013000",amount:4800,purpose:L.purposeV,vop:S.vop,newPayee:true},
+    ctx:{onCall:true,answers:st.ans,hour:new Date().getHours()},transcript:mic||st.live?"":L.script.join(" ")});
+  $("toast").classList.remove("show");
+}
+
+/* live call check: mic -> 5s 16kHz wav chunks -> /api/listen */
+let mic=null,micQ=Promise.resolve(),micN=0;
+function tail(s){return s?"… "+s.slice(-140):t().listening}
+function liveHTML(){return st.liveLvl==="pause"||st.liveLvl==="notice"?`<div class="banner">${ic.info}<span data-read>${t().liveWarn}</span></div>`:""}
+function micStop(){if(mic){mic.stop();mic=null}}
+function wav16(ch,n,rate){
+  const f=new Float32Array(n);let o=0;for(const c of ch){f.set(c,o);o+=c.length}
+  const r=rate/16000,len=Math.floor(n/r),v=new DataView(new ArrayBuffer(44+len*2));
+  const s=(p,x)=>[...x].forEach((c,i)=>v.setUint8(p+i,c.charCodeAt(0)));
+  s(0,"RIFF");v.setUint32(4,36+len*2,true);s(8,"WAVEfmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,16000,true);v.setUint32(28,32000,true);v.setUint16(32,2,true);v.setUint16(34,16,true);s(36,"data");v.setUint32(40,len*2,true);
+  for(let i=0;i<len;i++){let a=0,k=0;for(let j=Math.floor(i*r);j<Math.floor((i+1)*r);j++){a+=f[j];k++}v.setInt16(44+i*2,Math.max(-1,Math.min(1,a/(k||1)))*32767,true)}
+  return v.buffer}
+async function hear(b){
+  const r=await fetch(API+`/api/listen?sid=${SID}&lang=${pref.lang}`,{method:"POST",headers:{"Content-Type":"audio/wav"},body:b,signal:AbortSignal.timeout(30000)}).then(r=>r.ok?r.json():null).catch(()=>null);
+  if(!r||!mic)return;
+  st.live=r.transcript;st.liveLvl=r.level;
+  const el=$("say");if(el)el.textContent=tail(st.live);
+  const lv=$("live");if(lv)lv.innerHTML=liveHTML();
+}
+async function listenToggle(){
+  if(mic){micStop();render(false);return}
+  try{
+    const ms=await navigator.mediaDevices.getUserMedia({audio:{channelCount:1,noiseSuppression:true}});
+    const ac=new AudioContext(),src=ac.createMediaStreamSource(ms),pr=ac.createScriptProcessor(4096,1,1),rate=ac.sampleRate;
+    let buf=[],n=0;
+    const flush=()=>{const b=wav16(buf,n,rate);buf=[];n=0;if(micN<3){micN++;micQ=micQ.then(()=>hear(b)).finally(()=>micN--)}};
+    // cut in a pause after 3s so words don't get split, at the latest after 8s
+    pr.onaudioprocess=e=>{const d=new Float32Array(e.inputBuffer.getChannelData(0));buf.push(d);n+=d.length;
+      let q=0;for(const x of d)q+=x*x;
+      if((n>=rate*3&&Math.sqrt(q/d.length)<.01)||n>=rate*8)flush()};
+    src.connect(pr);pr.connect(ac.destination);
+    mic={stop(){pr.disconnect();src.disconnect();ms.getTracks().forEach(x=>x.stop());ac.close();if(n>=rate)flush()}};
+    st.live="";st.liveLvl=null;render(false);
+  }catch(e){toast(t().micNo)}
+}
 
 /* ---------- text splitting ---------- */
 function split(el){
@@ -350,8 +405,8 @@ function screenHTML(){
   const L=t(),S=SCEN[st.scen];
   const off=S.offline?`<div class="banner" role="alert">${ic.wifi}<span>${L.offline}</span></div>`:"";
   switch(st.screen){
-  case "bank":return `${off}<p class="meta">${L.from}</p><h1 tabindex="-1" data-read>${L.transfer}</h1>
-    <div class="call"><div class="top"><span class="dot" aria-hidden="true"></span><span data-read>${L.callNow}</span></div>
+  case "bank":return `${off}<p class="meta">${L.from}</p><h1 tabindex="-1" data-read>${L.transfer}</h1><div id="live" role="status">${liveHTML()}</div>
+    <div class="call"><div class="top"><span class="dot" aria-hidden="true"></span><span data-read>${L.callNow}</span>${API!==null&&!S.offline?`<button class="chip" data-act="listen" aria-pressed="${!!mic}" style="margin-left:auto">${mic?L.listenOff:L.listen}</button>`:""}</div>
       <p class="say"><span class="sr">${L.script.join(" ")}</span><span id="say" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span></p></div>
     <div class="card"><div class="field"><span>${L.payee}</span><span>M. Keller</span></div><div class="field"><span>${L.iban}</span><span>DE89 3704 0044 0532 0130 00</span></div>
       <div class="field"><span>${L.purpose}</span><span>${L.purposeV}</span></div><div class="field" style="border:0"><span>${L.amountL}</span><span class="amount">${L.amount}</span></div></div>
@@ -366,7 +421,8 @@ function screenHTML(){
     const a=st.ans,pts=[];
     if(a[0]!=="no")pts.push([ic.phone,L.pCall,L.pCallD]);if(a[1]!=="no")pts.push([ic.clock,L.pRush,L.pRushD]);if(a[2]!=="yes")pts.push([ic.user,L.pNew,L.pNewD]);
     const v=S.vop==="mismatch"?[L.vMis,L.vMisD]:S.vop==="close"?[L.vClose,L.vCloseD]:[L.vMatch,L.vMatchD];
-    const list=pts.slice(0,2).concat([[ic.id,v[0],v[1]]]);
+    const ai=st.ai&&st.ai.lang===pref.lang&&st.ai.points.length?st.ai.points.map(p=>[ic[p.icon]||ic.info,esc(p.title),esc(p.detail)]):null;
+    const list=(ai||pts).slice(0,2).concat([[ic.id,v[0],v[1]]]);
     return `<h1 tabindex="-1" data-read>${L.findH}</h1><ul class="points">${list.map(p=>`<li><span class="ic">${p[0]}</span><span><span data-read>${p[1]}</span>${pref.simple?"":`<small data-read>${p[2]}</small>`}</span></li>`).join("")}</ul><div class="grow"></div>
     <button class="btn pri" data-act="trust">${L.ask}</button><button class="btn" data-act="pause">${L.pauseBtn}</button><button class="btn quiet" data-act="anyway">${L.anyway}</button>`;}
   case "trust":
@@ -425,8 +481,9 @@ function render(focus=true){
 }
 function typeScript(){
   const L=t(),el=$("say");if(!el)return;let li=0,ci=0;
+  if(mic||st.live){el.textContent=tail(st.live);return}
   if(RM){el.textContent=L.script[0];return}
-  const tick=()=>{if(!$("say"))return;const line=L.script[li];
+  const tick=()=>{if(!$("say")||mic)return;const line=L.script[li];
     if(ci<=line.length){el.textContent=line.slice(0,ci);ci++;typeT=setTimeout(tick,38)}
     else{typeT=setTimeout(()=>{li=(li+1)%L.script.length;ci=0;tick()},1800)}};
   tick();
@@ -466,7 +523,7 @@ document.addEventListener("pointerdown",e=>{
 $("screen").addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b||busy)return;
   if(b.dataset.ans){st.ans[st.q]=b.dataset.ans;b.classList.add("sel");A(b,[{transform:"scale(.97)"},{transform:"scale(1.02)"},{transform:"scale(1)"}],{duration:320,easing:SPRING});
-    busy=true;setTimeout(()=>{busy=false;if(st.q<2){st.q++;render()}else go("findings")},300);return}
+    busy=true;setTimeout(async()=>{if(st.q<2){busy=false;st.q++;render()}else{await aiCheck();busy=false;go("findings")}},300);return}
   const a=b.dataset.act,L=t();
   if(a==="approve"){go("notice");chime("calm")}if(a==="check")go("q",{q:0,ans:[]});if(a==="notnow")go("pause");if(a==="dictated")go("trust");
   if(a==="trust")go("trust",{anyway:false});if(a==="pause")go("pause");if(a==="anyway"){st.anyway=true;render()}
@@ -475,7 +532,8 @@ $("screen").addEventListener("click",e=>{
   if(a==="bankcall"||a==="block")toast(L.tCallSim);if(a==="add")toast(L.tAdd);if(a==="report")toast(L.tReport);
   if(a==="cancel"){go("done",{variant:"cancel"});chime("done")}if(a==="later")go("done",{variant:"later"});
   if(a==="recheck")go("findings",{expired:false,left:1800});
-  if(a==="restart"){st=fresh(st.scen);annaRender();render()}
+  if(a==="listen")listenToggle();
+  if(a==="restart"){micStop();SID=newId();st=fresh(st.scen);annaRender();render()}
 });
 $("pscreen").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const L=t();
   if(b.dataset.anna==="stop"){st.anna=2;st.annaMsg=true;annaRender();toast(L.tAnnaStop);if(st.screen!=="done")go("pause")}

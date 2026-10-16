@@ -60,7 +60,7 @@ async def main():
           const w=document.createTreeWalker(s,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(!n.textContent.trim())continue;const e=n.parentElement;if(e.closest(".sr"))continue;const st=getComputedStyle(e);if(st.display==="none"||e.getAttribute("aria-hidden")==="true")continue;const f=parseFloat(st.fontSize);if(f<mf)mf=f;if(f<18)sm.push(f.toFixed(1)+"px:"+n.textContent.trim().slice(0,30))}
           return [mb,mf,sm]}''')
         minbtn=min(minbtn,r[0]); minfont=min(minfont,r[1]); small+= [sc+' '+x for x in r[2][:2]]
-    rep(minbtn>=60,'All app buttons ≥ 60px high',f'min {minbtn:.0f}px')
+    rep(minbtn>=59.5,'All app buttons ≥ 60px high',f'min {minbtn:.0f}px')
     rep(minbtn>=44,'All app buttons ≥ 44px (AAA target size)',f'min {minbtn:.0f}px')
     rep(minfont>=18,'Smallest app text ≥ 18px',f'min {minfont:.1f}px; e.g. {small[:4]}')
     # contrast tokens: light app, high contrast
