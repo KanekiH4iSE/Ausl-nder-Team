@@ -57,7 +57,7 @@ a{text-underline-offset:4px}
 header.top{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line)}
 .flag{display:flex;height:6px}.flag span{flex:1;transform-origin:left}
 .flag span:nth-child(1){background:#000}.flag span:nth-child(2){background:var(--flag-red)}.flag span:nth-child(3){background:var(--gold)}
-.bar{display:flex;align-items:center;gap:1.25rem;min-height:72px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.25rem;min-height:72px;padding-top:.4rem;padding-bottom:.4rem}
 .brand{display:flex;align-items:center;gap:.7rem;margin-right:auto;text-decoration:none}
 .mark{display:flex;gap:4px;height:26px}.mark i{display:block;width:7px;border-radius:3px;transform-origin:bottom}
 .mark i:nth-child(1){background:var(--ink)}.mark i:nth-child(2){background:var(--flag-red)}.mark i:nth-child(3){background:var(--gold)}
@@ -186,7 +186,7 @@ section.block{padding:clamp(3rem,7vw,6rem) 0;border-top:1px solid var(--line)}
 .btn:active{transform:scale(.98)}
 .btn.pri{background:var(--ink);color:var(--paper)}
 .btn.stop{background:var(--red);border-color:var(--red);color:#fff}
-.btn.quiet{border-color:transparent;font-weight:500;font-size:1rem;min-height:48px;text-decoration:underline;text-underline-offset:4px}
+.btn.quiet{border-color:transparent;font-weight:500;font-size:1.125rem;min-height:60px;text-decoration:underline;text-underline-offset:4px}
 .btn svg{width:24px;height:24px;flex:none}
 .btn.left{justify-content:flex-start}
 .btn.sel{background:var(--gold-soft);border-color:var(--ink);color:var(--gold-ink)}
@@ -214,7 +214,7 @@ section.block{padding:clamp(3rem,7vw,6rem) 0;border-top:1px solid var(--line)}
 .answers .btn{justify-content:flex-start;padding-left:1.4rem}
 .answers .btn .k{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:2px solid currentColor;font-size:.95rem}
 .points{list-style:none;padding:0;margin:.4rem 0 1rem}
-.points li{display:flex;gap:.9rem;align-items:flex-start;padding:.95rem 0;border-top:1px solid var(--line);font-size:1.12rem}
+.points li{display:flex;gap:.9rem;align-items:flex-start;padding:.95rem 0;border-top:1px solid var(--line);font-size:1.125rem}
 .points li:last-child{border-bottom:1px solid var(--line)}
 .points .ic{flex:none;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--gold-soft);color:var(--gold-ink)}
 .points .ic svg{width:20px;height:20px}
@@ -324,3 +324,9 @@ footer p{margin:.25rem 0;max-width:70ch}
   .breath .disc{animation:none;transform:scale(.92)}
   .reveal{opacity:1}
 }
+
+/* app text never below 18px */
+.screen{font-size:1.125rem}
+.screen .meta,.screen .step,.screen .tag,.screen .points small,.screen .hint,.screen .breath .t span,.screen .field,.screen .call,.screen .banner,.screen .lead{font-size:1.125rem}
+.screen .tag{padding:.1rem .5rem}
+.back .flip{color:var(--paper);text-decoration:underline;text-underline-offset:3px}
