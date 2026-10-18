@@ -14,12 +14,13 @@ Built for **Hyperbloom October 2026 – UI/UX and Web Design**.
 
 | | Link |
 |---|---|
-| Website + embedded demo | https://safepause-eine-pause-bevor-das-geld.vercel.app |
+| Website + app + API on Deployxa | https://ausl-nder-team.deployxa.online · app: https://ausl-nder-team.deployxa.online/?app |
+| Static mirror (Vercel, demo mode) | https://safepause-eine-pause-bevor-das-geld.vercel.app |
 | Full-screen web app | https://safepause-eine-pause-bevor-das-geld.vercel.app/?app |
 | Autoplay demo (≈1 min, used for the video) | https://safepause-eine-pause-bevor-das-geld.vercel.app/?tour · English: `?tour&lang=en` |
 | Screenshots | [`docs/screenshots/`](docs/screenshots) |
 | Figma (design system + all screens) | https://www.figma.com/design/zqsFbcjS9xFOHUwD7kcv7V/SafePause |
-| Video | *add link* |
+| Video (1:58) | https://youtu.be/merlbip2d4g |
 
 ## The problem
 
