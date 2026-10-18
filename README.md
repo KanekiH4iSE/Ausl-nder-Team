@@ -18,7 +18,7 @@ Built for **Hyperbloom October 2026 – UI/UX and Web Design**.
 | Full-screen web app | https://safepause-eine-pause-bevor-das-geld.vercel.app/?app |
 | Autoplay demo (≈1 min, used for the video) | https://safepause-eine-pause-bevor-das-geld.vercel.app/?tour · English: `?tour&lang=en` |
 | Screenshots | [`docs/screenshots/`](docs/screenshots) |
-| Figma prototype | *add link* |
+| Figma (design system + all screens) | https://www.figma.com/design/zqsFbcjS9xFOHUwD7kcv7V/SafePause |
 | Video | *add link* |
 
 ## The problem

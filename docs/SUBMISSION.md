@@ -19,7 +19,7 @@ Everything needed for the Hyperbloom October submission. Copy the texts, upload 
 - Web app: https://safepause-eine-pause-bevor-das-geld.vercel.app/?app
 - Deployxa: *add link after deploy*
 - GitHub: https://github.com/KanekiH4iSE/Ausl-nder-Team *(rename the repo to `safepause` before submitting, then update)*
-- Figma: *add link*
+- Figma: https://www.figma.com/design/zqsFbcjS9xFOHUwD7kcv7V/SafePause
 - Video: *add YouTube link*
 
 **Screenshots (upload in this order):** `docs/screenshots/01-hero.png`, `03-calm-notice.png`, `04-question.png`, `05-what-we-noticed.png`, `06-anna.png`, `07-safe-pause.png`, `08-calm-vs-alarm.png`, `09-scam-patterns.png`, `10-accessibility.png`, `11-phone.png`, `12-high-contrast-large-text.png`
@@ -91,7 +91,7 @@ Testing with older people in Berlin, more languages for migrant seniors (Turkish
 - [ ] Team names and roles in README and on Devpost; all 3 members accepted the Devpost invite
 - [ ] Deployxa link works (`/api/health` returns ok)
 - [ ] Video uploaded (public or unlisted), opens in an incognito window
-- [ ] Figma link (view-only) added
+- [ ] Figma file shared as "Anyone with the link can view"
 - [ ] Cover + screenshots uploaded
 - [ ] "Best Use of Deployxa" selected if the form asks
 - [ ] If you tested with older people: add 1–2 quotes to the story and README
