@@ -202,9 +202,9 @@ We used Claude (Anthropic) to help with research, copywriting and front-end code
 
 ## Team
 
-- Mirzobehruz Shaidov ([@KanekiH4iSE](https://github.com/KanekiH4iSE)) – *role*
-- [@Nems1337](https://github.com/veyselpavyoncuoglu) – backend, scam detection rules, Laya fine-tuning, live call check
-- *Name – role*
+- Mirzobehruz Shaidov ([@KanekiH4iSE](https://github.com/KanekiH4iSE)) – research, frontend
+- Bora Eren ([@Nems1337](https://github.com/Nems1337)) – backend, scam detection rules, Laya fine-tuning, live call check
+- Rohan Thomas Vinu – Figma design, demo video (Remotion)
 
 ## License
 

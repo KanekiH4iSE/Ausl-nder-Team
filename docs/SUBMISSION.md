@@ -12,7 +12,7 @@ Everything needed for the Hyperbloom October submission. Copy the texts, upload 
 
 **Thumbnail / cover:** `docs/cover.png` (1500 × 1000, 3:2)
 
-**Built with:** html, css, javascript, web-animations-api, canvas, web-speech-api, web-audio-api, python, fastapi, sqlite, laya, vercel, deployxa, figma
+**Built with:** html, css, javascript, web-animations-api, canvas, web-speech-api, web-audio-api, python, fastapi, sqlite, laya, vercel, deployxa, figma, remotion
 
 **Links:**
 - Live website: https://safepause-eine-pause-bevor-das-geld.vercel.app
